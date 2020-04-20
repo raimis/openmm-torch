@@ -32,6 +32,7 @@ requirements:
     - {{ compiler('cxx') }}
     - {{ cdt('mesa-libgl-devel') }}
     - cmake
+    - make
     - ocl-icd
     - openmm
     - python
