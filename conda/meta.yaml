@@ -19,8 +19,8 @@ build:
     - lib/python3.8/site-packages/torch/lib/ # [py==38]
   script:
     - cmake $SRC_DIR
-            -DOPENMM_DIR=$BUILD_PREFIX
-            -DPYTORCH_DIR=$BUILD_PREFIX/lib/python$PY_VER/site-packages/torch
+            -DOPENMM_DIR=$PREFIX
+            -DPYTORCH_DIR=$PREFIX/lib/python$PY_VER/site-packages/torch
             -DCMAKE_BUILD_TYPE=Release
             -DCMAKE_INSTALL_PREFIX=$PREFIX
     - make -j $CPU_COUNT
@@ -33,11 +33,12 @@ requirements:
     - {{ cdt('mesa-libgl-devel') }}
     - cmake
     - make
+    - swig
+  host:
     - ocl-icd
     - openmm
     - python
     - pytorch
-    - swig
   run:
     - ocl-icd
     - ocl-icd-system
