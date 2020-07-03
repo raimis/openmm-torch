@@ -38,13 +38,13 @@ requirements:
     - ocl-icd
     - openmm
     - python
-    - pytorch
+    - pytorch 1.4.0
   run:
     - ocl-icd
     - ocl-icd-system
     - openmm
     - python
-    - pytorch
+    - pytorch 1.4.0
 
 test:
   source_files:
