@@ -80,11 +80,13 @@ double CudaCalcTorchForceKernel::execute(ContextImpl& context, bool includeForce
     vector<torch::jit::IValue> inputs = {posTensor};
     if (usePeriodic)
         inputs.push_back(boxTensor);
+    cuCtxSynchronize();
     torch::Tensor energyTensor = module.forward(inputs).toTensor();
     if (includeForces) {
         energyTensor.backward();
         // Note: "forceTensor" needs to be cloned due to a shared context (https://github.com/openmm/openmm-torch/issues/13)
         torch::Tensor forceTensor = posTensor.grad().clone();
+        cuCtxSynchronize();
         cu.setAsCurrent();
         void* data;
         if (cu.getUseDoublePrecision()) {
